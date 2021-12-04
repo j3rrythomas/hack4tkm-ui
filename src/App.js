@@ -8,8 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useEffect } from "react";
 import axios from "axios";
+import { Switch, Route } from "react-router-dom";
+import { useHistory } from "react-router";
 
 import { setUserRole } from "./reducers/dataSlice";
+import { UsersList, Profile, Dashboard } from "./pages";
 
 const ProdName = styled.div`
   color: #ffffff;
@@ -21,8 +24,11 @@ const ProdName = styled.div`
 
 const { Sider, Header, Content } = Layout;
 const App = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const userRole = useSelector((state) => state.data.userRole);
+  const menuItem = useSelector((state) => state.data.menuItem);
+
   useEffect(() => {
     const getRole = async () => {
       await axios
@@ -31,25 +37,33 @@ const App = () => {
         )
         .then((response) => {
           dispatch(setUserRole(response.data.role));
-        });
+        })
+        .catch((error) => console.error(error));
     };
     getRole();
   }, [dispatch, userRole]);
+  const handleMenuItemChange = ({ key }) => {
+    history.push(key === "dashboard" ? "" : key);
+  };
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider>
         <ProdName>Electra</ProdName>
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="1" icon={<FundOutlined />}>
+        <Menu
+          theme="dark"
+          selectedKeys={menuItem}
+          mode="inline"
+          onClick={handleMenuItemChange}
+        >
+          <Menu.Item key="dashboard" icon={<FundOutlined />}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key="2" icon={<UserOutlined />}>
-            Profiles
+          <Menu.Item key="profile" icon={<UserOutlined />}>
+            Profile
           </Menu.Item>
           {userRole === "ADMIN" ? (
-            <Menu.Item key="3" icon={<UnorderedListOutlined />}>
-              {console.log("H")}
-              Users
+            <Menu.Item key="usersList" icon={<UnorderedListOutlined />}>
+              Users List
             </Menu.Item>
           ) : (
             <></>
@@ -58,7 +72,13 @@ const App = () => {
       </Sider>
       <Layout>
         <Header style={{ background: "#FFFFFF" }}>Header</Header>
-        <Content>Content</Content>
+        <Content>
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/usersList" component={UsersList} />
+          </Switch>
+        </Content>
       </Layout>
     </Layout>
   );
