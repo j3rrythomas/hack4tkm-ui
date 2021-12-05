@@ -33,7 +33,7 @@ const App = () => {
     const getRole = async () => {
       await axios
         .get(
-          "https://electrothon-backend.herokuapp.com/61ab5a6f69213da578f530c9"
+          "https://electrothon-backend.herokuapp.com/61ab84cab5c4a84d673da561"
         )
         .then((response) => {
           dispatch(setUserRole(response.data.role));
@@ -46,7 +46,7 @@ const App = () => {
     history.push(key === "dashboard" ? "" : key);
   };
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "100vh", maxHeight: "100vh" }}>
       <Sider>
         <ProdName>Electra</ProdName>
         <Menu
