@@ -1,0 +1,9 @@
+.centralize{
+    display:"flex";
+    justify-content:"center";
+    align-content:"center";
+}
+
+.adjust{
+    margin: '70px';
+}
