@@ -6,8 +6,7 @@ import Axios from "axios";
 
 import { setMenuItem } from "../reducers/dataSlice";
 import checkRole from "../components/checkRole";
-import { useHistory } from "react-router-dom";
-import { Button, Modal, Form, Input, Radio } from "antd";
+import { Button, Modal, Form, Input } from "antd";
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
@@ -129,7 +128,6 @@ const UsersList = () => {
   };
 
   const dispatch = useDispatch();
-  const history = useHistory();
   useEffect(() => {
     dispatch(setMenuItem("usersList"));
     Axios.get("https://electrothon-backend.herokuapp.com/").then((response) => {
