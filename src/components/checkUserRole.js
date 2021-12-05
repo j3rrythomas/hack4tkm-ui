@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { Redirect } from "react-router";
 
 
-const checkRole = (Component) => {
+const checkUserRole = (Component) => {
   // Higher Order Component that only displays component(that it takes as input) if it is authenticated
   const AuthRoute = () => {
-    const isAdmin = useSelector((state) => state.data.userRole === "ADMIN");
-    if (isAdmin) {
+    const isUser = useSelector((state) => state.data.userRole === "USER");
+    if (isUser) {
       return <Component />;
     }
     return <Redirect to="/" />;
@@ -15,4 +15,4 @@ const checkRole = (Component) => {
   return AuthRoute;
 };
 
-export default checkRole;
+export default checkUserRole;

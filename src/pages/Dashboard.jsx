@@ -18,7 +18,7 @@ import {
 } from "recharts";
 
 import { setMenuItem, setReqServiceVisible } from "../reducers/dataSlice";
-import { RequestServiceModal } from "../components";
+import { MapChart, RequestServiceModal } from "../components";
 
 const DashboardContainer = styled.div`
   height: 100%;
@@ -261,6 +261,9 @@ const Dashboard = () => {
                 />
                 <Legend />
               </PieChart>
+            </Col>
+            <Col span={24}>
+              <MapChart />
             </Col>
           </GraphsRow>
         </AdminDashboard>

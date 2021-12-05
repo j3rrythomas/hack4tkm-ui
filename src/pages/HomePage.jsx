@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 
-import { UsersList, Profile, Dashboard } from ".";
+import { UsersList, Profile, Dashboard, Payment } from ".";
 
 const ProdName = styled.div`
   color: #ffffff;
@@ -48,7 +48,9 @@ const HomePage = () => {
               Users List
             </Menu.Item>
           ) : (
-            <></>
+            <Menu.Item key="payment" icon={<FundOutlined />}>
+              Payment
+            </Menu.Item>
           )}
         </Menu>
       </Sider>
@@ -70,6 +72,7 @@ const HomePage = () => {
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/usersList" component={UsersList} />
+            <Route exact path="/payment" component={Payment} />
           </Switch>
         </Content>
       </Layout>

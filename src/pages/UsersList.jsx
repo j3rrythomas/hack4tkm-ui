@@ -4,8 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Table } from "react-bootstrap";
 import Axios from "axios";
 
-import { setMenuItem } from "../reducers/dataSlice";
-import checkRole from "../components/checkRole";
+import { setMenuItem, setPredictUsageVisible } from "../reducers/dataSlice";
+import { checkRole, PredictUsageModal } from "../components";
 import { Button, Modal, Form, Input } from "antd";
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
@@ -138,9 +138,9 @@ const UsersList = () => {
   const deleteUser = (id) => {
     Axios.delete(`https://electrothon-backend.herokuapp.com/${id}`).then(
       async () => {
-        Axios.get(
-          "https://electrothon-backend.herokuapp.com/"
-        ).then((response) => setUsers(response.data));
+        Axios.get("https://electrothon-backend.herokuapp.com/").then(
+          (response) => setUsers(response.data)
+        );
         // history.push("/usersList");
       }
     );
@@ -172,6 +172,7 @@ const UsersList = () => {
             <th>Email</th>
             <th>Phone</th>
             <th>ID</th>
+            <th>Issues</th>
           </tr>
         </thead>
         <tbody>
@@ -183,14 +184,22 @@ const UsersList = () => {
                 <td>{val.email}</td>
                 <td>{val.phone}</td>
                 <td>{val._id}</td>
+                <td>{val.ComplainsandServices.length}</td>
                 <Button
+                  type="link"
+                  onClick={() => dispatch(setPredictUsageVisible(true))}
+                >
+                  Predict
+                </Button>{" "}
+                <Button
+                  type="link"
                   onClick={() => {
                     deleteUser(val._id);
                   }}
-                  variant="danger"
                 >
                   Delete
-                </Button>{" "}
+                </Button>
+                <PredictUsageModal />
               </tr>
             );
           })}

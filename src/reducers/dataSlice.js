@@ -4,10 +4,11 @@ const initialDataState = {
   userRole: "USER",
   menuItem: "dashboard",
   requestServiceVisible: false,
-  userId: "61ab84cab5c4a84d673da561",
+  userId: "61ac8f41c6ac32b388289b4a",
+  predictUsageVisible: false,
 };
 const dataSlice = createSlice({
-  name: "auth",
+  name: "data",
   initialState: initialDataState,
   reducers: {
     setUserRole: (state, action) => {
@@ -22,8 +23,16 @@ const dataSlice = createSlice({
     setUserId: (state, action) => {
       state.userId = action.payload;
     },
+    setPredictUsageVisible: (state, action) => {
+      state.predictUsageVisible = action.payload;
+    },
   },
 });
-export const { setUserRole, setMenuItem, setReqServiceVisible, setUserId } =
-  dataSlice.actions;
+export const {
+  setUserRole,
+  setMenuItem,
+  setReqServiceVisible,
+  setUserId,
+  setPredictUsageVisible,
+} = dataSlice.actions;
 export default dataSlice.reducer;
