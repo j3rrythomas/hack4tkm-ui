@@ -42,6 +42,14 @@ const AdminDashboard = styled.div`
     font-size: 1.5rem;
   }
 `;
+const GraphsRow = styled(Row)`
+  .ant-col {
+    background: #ffffff;
+    padding: 2%;
+    border-radius: 10px;
+  }
+`;
+
 const notifications = [
   "Racing car sprays burning fuel into crowd.",
   "Japanese princess to wed commoner.",
@@ -90,37 +98,36 @@ const weeklyData = [
 
 const hourlyData = [
   {
-    name: "00:00",
+    name: "12am",
     uv: 4000,
   },
   {
-    name: "04:00",
+    name: "4am",
     uv: 3000,
   },
   {
-    name: "08:00",
+    name: "8am",
     uv: 2000,
   },
   {
-    name: "12:00",
+    name: "12pm",
     uv: 2780,
   },
   {
-    name: "16:00",
+    name: "16pm",
     uv: 1890,
   },
   {
-    name: "20:00",
+    name: "20pm",
     uv: 2390,
   },
 ];
 const issuesData = [
-  { name: "Service", data: 400,fill:"#1890ff"},
-  { name: "Complaints",data: 700,fill:"#82ca9d" },
+  { name: "Service", data: 400, fill: "#1890ff" },
+  { name: "Complaints", data: 700, fill: "#82ca9d" },
 ];
 
 const Dashboard = () => {
-
   const dispatch = useDispatch();
   const userRole = useSelector((state) => state.data.userRole);
   useEffect(() => {
@@ -221,7 +228,7 @@ const Dashboard = () => {
               </Card>
             </Col>
           </Row>
-          <Row>
+          <GraphsRow>
             <Col flex={1}>
               <BarChart width={400} height={250} data={weeklyData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -243,8 +250,7 @@ const Dashboard = () => {
               </LineChart>
             </Col>
             <Col flex={1}>
-              <PieChart width={
-                400} height={250}>
+              <PieChart width={400} height={250}>
                 <Pie
                   cx="50%"
                   cy="50%"
@@ -256,7 +262,7 @@ const Dashboard = () => {
                 <Legend />
               </PieChart>
             </Col>
-          </Row>
+          </GraphsRow>
         </AdminDashboard>
       )}
     </DashboardContainer>
