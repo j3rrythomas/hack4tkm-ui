@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router";
 
-import { setUserRole } from "./reducers/dataSlice";
 import HomePage from "./pages/HomePage";
 
 const App = () => {
@@ -16,7 +15,7 @@ const App = () => {
       await axios
         .get(`https://electrothon-backend.herokuapp.com/${userId}`)
         .then((response) => {
-          dispatch(setUserRole(response.data.role));
+          // dispatch(setUserRole(response.data.role));
         })
         .catch((error) => console.error(error));
     };

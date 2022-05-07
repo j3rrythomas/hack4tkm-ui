@@ -5,11 +5,12 @@ import {
   UserOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 
 import { UsersList, Profile, Dashboard, Payment } from ".";
+import { setUserId, setUserRole } from "../reducers/dataSlice";
 
 const ProdName = styled.div`
   color: #ffffff;
@@ -23,6 +24,7 @@ const { Sider, Header, Content } = Layout;
 const HomePage = () => {
   const menuItem = useSelector((state) => state.data.menuItem);
   const userRole = useSelector((state) => state.data.userRole);
+  const dispatch = useDispatch();
   const history = useHistory();
   const handleMenuItemChange = ({ key }) => {
     history.push(key === "dashboard" ? "" : key);
@@ -63,8 +65,20 @@ const HomePage = () => {
             alignItems: "center",
           }}
         >
-          <Button size="large" type="primary">
-            Logout
+          <Button
+            size="large"
+            type="primary"
+            onClick={() => {
+              if (userRole === "USER") {
+                dispatch(setUserRole("ADMIN"));
+                dispatch(setUserId("61b99d6349907d26c0f5b7ee"));
+              } else {
+                dispatch(setUserRole("USER"));
+                dispatch(setUserId("6202405e8a1c088923f97930"));
+              }
+            }}
+          >
+            Switch Role
           </Button>
         </Header>
         <Content>

@@ -35,7 +35,7 @@ const PredictUsageModal = () => {
                 message.info(
                   `The predicted usage for given time is ${response.data.result.toFixed(
                     2
-                  )}`,
+                  )}Wh`,
                   10
                 )
               )
